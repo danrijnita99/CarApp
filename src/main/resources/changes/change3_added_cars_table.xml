@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="change3_added_cars_table" author="Dan Rijnita">
+        <sql>
+            CREATE TABLE public.cars (
+            id serial NOT NULL,
+            brand varchar(256) NOT NULL,
+            model varchar(256) NOT NULL,
+            price int4 NOT NULL,
+            available bool NOT NULL DEFAULT true
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
