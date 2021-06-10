@@ -4,9 +4,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet id="change4_added_user_cars_table" author="Dan Rijnita">
+    <changeSet id="change4_added_user_cars_table" author="Dan Rijnita" context="prod">
         <sql>
-            CREATE TABLE public.user_cars (
+            CREATE TABLE prod.user_cars (
             user_id serial NOT NULL,
             firstname varchar(256) NOT NULL,
             lastname varchar(256) NOT NULL,

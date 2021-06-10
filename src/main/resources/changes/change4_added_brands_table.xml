@@ -4,11 +4,15 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet id="change2_modified_users_table" author="Dan Rijnita" context="prod">
+    <changeSet id="change4_added_brands_table" author="Dan Rijnita" context="prod">
         <sql>
-            ALTER TABLE prod.users ADD username varchar(256) NOT NULL;
-            ALTER TABLE prod.users ADD "password" varchar(2048) NOT NULL;
-
+            CREATE TABLE prod.brands (
+            id serial NOT NULL,
+            "name" varchar NOT NULL,
+            created_date timestamp(0) NOT NULL DEFAULT now(),
+            CONSTRAINT brands_pk PRIMARY KEY (id),
+            CONSTRAINT brands_un UNIQUE (name)
+            );
         </sql>
     </changeSet>
 </databaseChangeLog>
