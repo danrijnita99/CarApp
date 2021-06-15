@@ -2,11 +2,10 @@ package com.cv.services;
 
 import com.cv.dtos.UserDTO;
 import com.cv.entities.User;
-import com.cv.exceptions.UserAlreadyExistingException;
+import com.cv.exceptions.UserAlreadyExistsException;
 import com.cv.exceptions.UserDoesNotExistException;
 import com.cv.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,19 +14,16 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    public User save(UserDTO newUser) throws UserAlreadyExistingException {
+    public User save(UserDTO newUser) throws UserAlreadyExistsException {
        User user =  userRepository.findByUsername(newUser.getUsername());
 
        if (user != null) {
-           throw new UserAlreadyExistingException();
+           throw new UserAlreadyExistsException("User" + user.getUsername() + " already exists!");
        }
 
        User newCreatedUser = User.builder()
                .username(newUser.getUsername())
-              // .password(passwordEncoder.encode(newUser.getPassword()))
                .password(newUser.getPassword())
                .email(newUser.getEmail())
                .firstName(newUser.getFirstName())
@@ -35,11 +31,11 @@ public class UserService {
                .active(newUser.getActive())
                .build();
 
-       return userRepository.saveAndFlush(newCreatedUser);
+       return userRepository.save(newCreatedUser);
     }
     public User oneUser(Long id) throws UserDoesNotExistException {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserDoesNotExistException());
+                .orElseThrow(() -> new UserDoesNotExistException("User with id " + id + " does not exist!"));
     }
 
     public List<User> allUsers() {

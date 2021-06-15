@@ -2,8 +2,8 @@ package com.cv.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class CarDoesNotExistException extends GeneralException{
-    public CarDoesNotExistException (String message) {
+public class UserAlreadyExistsException extends GeneralException {
+    public UserAlreadyExistsException(String message) {
         super(HttpStatus.CONFLICT, message);
     }
 }

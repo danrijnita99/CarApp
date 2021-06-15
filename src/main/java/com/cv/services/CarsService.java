@@ -22,29 +22,24 @@ public class CarsService {
                 .price(newCar.getPrice())
                 .available(newCar.getAvailable())
                 .build();
+        Car c1 = new Car().setAvailable(false)
+                .setBrand("asd")
+                .setModel("asd")
+                .setPrice(100);
 
-        return carRepository.saveAndFlush(newCreatedCar);
+        return carRepository.save(newCreatedCar);
     }
 
     public List<Car> searchCarBrand(String brand) throws CarDoesNotExistException {
         List<Car> searchedCar = carRepository.findByBrand(brand);
 
-        if (searchedCar.isEmpty() == true) {
-            throw(new CarDoesNotExistException());
+        if (searchedCar.isEmpty()) {
+            throw new CarDoesNotExistException("Car with brand " + brand + " does not exist!");
         } else {
             return searchedCar;
         }
     }
 
-//    public List<Car> searchCarModel(String model) throws CarDoesNotExistException {
-//        List<Car> searchedCar = carRepository.findByModel(model);
-//
-//        if (searchedCar.isEmpty() == true) {
-//            throw(new CarDoesNotExistException());
-//        } else {
-//            return searchedCar;
-//        }
-//    }
 
     public List<Car> getAllCars() {
         return carRepository.findAll();
@@ -52,5 +47,10 @@ public class CarsService {
 
     public void deleteCar(Long id) throws CarDoesNotExistException {
         carRepository.deleteById(id);
+    }
+
+    public Car oneCar(Long carId) throws CarDoesNotExistException {
+        return carRepository.findById(carId)
+                .orElseThrow(() -> new CarDoesNotExistException("Car with id " + carId + " does not exist!"));
     }
 }

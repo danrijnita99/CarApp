@@ -6,9 +6,10 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
         <include relativeToChangelogFile="true" file="changes/change1_added_users_table.xml"/>
-        <include relativeToChangelogFile="true" file="changes/change2_modified_users_table.xml"/>
         <include relativeToChangelogFile="true" file="changes/change3_added_cars_table.xml"/>
         <include relativeToChangelogFile="true" file="changes/change4_added_brands_table.xml"/>
+        <include relativeToChangelogFile="true" file="changes/change5_added_users_cars_table.xml"/>
+
 
 
 </databaseChangeLog>

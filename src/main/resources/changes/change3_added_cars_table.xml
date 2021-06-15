@@ -11,7 +11,8 @@
             brand varchar(256) NOT NULL,
             model varchar(256) NOT NULL,
             price int4 NOT NULL,
-            available bool NOT NULL DEFAULT true
+            available bool NOT NULL DEFAULT true,
+            CONSTRAINT cars_pk PRIMARY KEY (id)
             );
         </sql>
     </changeSet>
